@@ -1,13 +1,8 @@
 import { Router } from "express";
+import { healthCheck } from "../controllers/healthController.js";
 
 const router = Router();
 
-router.get("/health", (req, res) => {
-  res.status(200).json({
-    status: "ok",
-    service: "emi-platform-api",
-    timestamp: new Date().toISOString()
-  });
-});
+router.get("/health", healthCheck);
 
 export default router;
