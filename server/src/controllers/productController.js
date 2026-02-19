@@ -1,54 +1,42 @@
 import prisma from "../config/prisma.js";
+import { asyncHandler } from "../middleware/asyncHandler.js";
+import { createError } from "../middleware/errorHandler.js";
 
-export const listProducts = async (req, res) => {
-  try {
-    const products = await prisma.product.findMany({
-      select: {
-        id: true,
-        name: true,
-        slug: true,
-        price: true,
-        mrp: true,
-        imageUrl: true
-      },
-      orderBy: { name: "asc" }
-    });
+export const listProducts = asyncHandler(async (req, res) => {
+  const products = await prisma.product.findMany({
+    select: {
+      id: true,
+      name: true,
+      slug: true,
+      price: true,
+      mrp: true,
+      imageUrl: true
+    },
+    orderBy: { name: "asc" }
+  });
 
-    res.status(200).json({
-      data: products
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({
-      error: "Failed to fetch products"
-    });
-  }
-};
+  res.status(200).json({
+    status: "success",
+    data: products
+  });
+});
 
-export const getProductBySlug = async (req, res) => {
-  try {
-    const { slug } = req.params;
-    const product = await prisma.product.findUnique({
-      where: { slug },
-      include: {
-        variants: true,
-        emiPlans: true
-      }
-    });
-
-    if (!product) {
-      return res.status(404).json({
-        error: "Product not found"
-      });
+export const getProductBySlug = asyncHandler(async (req, res) => {
+  const { slug } = req.params;
+  const product = await prisma.product.findUnique({
+    where: { slug },
+    include: {
+      variants: true,
+      emiPlans: true
     }
+  });
 
-    return res.status(200).json({
-      data: product
-    });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({
-      error: "Failed to fetch product"
-    });
+  if (!product) {
+    throw createError(404, "Product not found");
   }
-};
+
+  res.status(200).json({
+    status: "success",
+    data: product
+  });
+});
