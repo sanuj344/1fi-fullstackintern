@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useParams } from "react-router-dom";
+import EmiPlanSelector from "../components/EmiPlanSelector.jsx";
 
 const formatCurrency = (value) =>
   new Intl.NumberFormat("en-IN", {
@@ -159,36 +160,13 @@ export default function ProductDetail() {
           </section>
 
           <section className="space-y-6">
-            <div className="rounded-2xl bg-white p-6 shadow-sm">
-              <h3 className="text-base font-semibold text-slate-900">Choose your EMI plan</h3>
-              <p className="mt-1 text-sm text-slate-600">
-                Flexible tenures with 0% interest options and cashback benefits.
-              </p>
-
-              <div className="mt-5 space-y-3">
-                {product.emiPlans.map((plan) => (
-                  <div
-                    key={plan.id}
-                    className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 px-4 py-3"
-                  >
-                    <div>
-                      <p className="text-sm font-semibold text-slate-900">
-                        {plan.tenureMonths} months EMI
-                      </p>
-                      <p className="text-xs text-slate-500">
-                        {plan.interestRate}% interest · Cashback {formatCurrency(toNumber(plan.cashback))}
-                      </p>
-                    </div>
-                    <div className="text-right">
-                      <p className="text-lg font-semibold text-slate-900">
-                        {formatCurrency(toNumber(plan.monthlyAmount))}
-                      </p>
-                      <p className="text-xs text-slate-500">per month</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <EmiPlanSelector
+              plans={product.emiPlans}
+              onProceed={(plan) => {
+                if (!plan) return;
+                console.log("Proceed with plan", plan.id);
+              }}
+            />
 
             <div className="rounded-2xl bg-white p-6 shadow-sm">
               <h3 className="text-base font-semibold text-slate-900">Why buy on EMI?</h3>
