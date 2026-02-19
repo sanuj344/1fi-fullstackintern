@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import EmiPlanSelector from "../components/EmiPlanSelector.jsx";
 
 const formatCurrency = (value) =>
@@ -155,6 +155,14 @@ export default function ProductDetail() {
             </h1>
           </div>
           <span className="text-xs text-slate-500">API: {apiUrl}</span>
+        </div>
+        <div className="mx-auto w-full max-w-6xl px-4 pb-4 sm:px-6">
+          <Link
+            to="/"
+            className="text-xs font-semibold text-blue-700 hover:text-blue-800"
+          >
+            ← Back to products
+          </Link>
         </div>
       </header>
 
