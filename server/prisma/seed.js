@@ -9,7 +9,7 @@ const products = [
     description: "6.6-inch AMOLED, 120Hz, 50MP triple camera, 5000mAh battery.",
     mrp: new Prisma.Decimal(44999),
     price: new Prisma.Decimal(38999),
-    imageUrl: "https://images.example.com/phones/nova-x1-5g.jpg",
+    imageUrl: "/images/1.jpg",
     variants: [
       { storage: "128GB", color: "Midnight Black" },
       { storage: "256GB", color: "Arctic Blue" }
@@ -47,7 +47,7 @@ const products = [
     description: "6.8-inch OLED, 200MP camera, Snapdragon 8 Gen, 1TB storage option.",
     mrp: new Prisma.Decimal(89999),
     price: new Prisma.Decimal(79999),
-    imageUrl: "https://images.example.com/phones/zenith-pro-max.jpg",
+    imageUrl: "/images/1.webp",
     variants: [
       { storage: "256GB", color: "Graphite" },
       { storage: "512GB", color: "Sierra Gold" }
@@ -91,7 +91,7 @@ const products = [
     description: "6.4-inch LCD, 90Hz, 48MP camera, 4500mAh battery.",
     mrp: new Prisma.Decimal(24999),
     price: new Prisma.Decimal(21999),
-    imageUrl: "https://images.example.com/phones/orbit-lite.jpg",
+    imageUrl: "/images/2.jpg",
     variants: [
       { storage: "64GB", color: "Mint Green" },
       { storage: "128GB", color: "Charcoal" }
